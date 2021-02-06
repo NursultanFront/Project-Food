@@ -1,51 +1,8 @@
-window.addEventListener("DOMContentLoaded", () => {
-    //Tabs
+function timer(id, deadline) {
+    //---------------------- Timer ---------------//
 
-    const tabs = document.querySelectorAll(".tabheader__item"); // Табы (фитнес, премиум, постное и сбалансированное)
-    const tabsContent = document.querySelectorAll(".tabcontent"); // Контент табов (картинки и описание)
-    const tabsParent = document.querySelector(".tabheader__items"); // Родитель tabs
+    //Шаблон для таймера
 
-    // Функция чтобы спрятать (очистить) табы
-    function hideTabContent() {
-        tabsContent.forEach((item) => {
-            item.classList.add("hide"); // Добавляем класс Hide
-            item.classList.remove("show", "fade"); // Удаляем класс Show
-        });
-
-        tabs.forEach((item) => {
-            item.classList.remove("tabheader__item_active"); // Удаляем класс активности
-        });
-    }
-    // Функция чтобы показать табы
-    function showTabContent(i = 0) {
-        tabsContent[i].classList.add("show", "fade"); // Добавляем класс Show
-        tabsContent[i].classList.remove("hide"); // Удаляем класс hide
-        tabs[i].classList.add("tabheader__item_active"); // добавляем класс активности (только одному)
-    }
-
-    hideTabContent();
-    showTabContent();
-
-    tabsParent.addEventListener("click", (event) => {
-        const target = event.target;
-
-        if (target && target.classList.contains("tabheader__item")) {
-            console.log(target);
-            //Если у таргета имеется класс tabheader__item
-            tabs.forEach((item, i) => {
-                //Тогда перебираем табы
-                if (target == item) {
-                    //если таргет и item совпадают то...
-                    hideTabContent();
-                    showTabContent(i);
-                }
-            });
-        }
-    });
-
-    // Timer
-
-    const deadline = "2021-02-03";
     function getTimeRemainning(endtime) {
         //функция получить разницу между датами!!!
         const t = Date.parse(endtime) - Date.parse(new Date()); // Date.parse метод Date, смотри в интернете
@@ -98,7 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    setClock(".timer", deadline);
+    setClock(id, deadline);
+}
 
-    //Шаблон для таймера
-});
+export default timer;
